@@ -1,19 +1,18 @@
 { inputs, ... }:
 {
   perSystem =
-    { pkgs, system, ... }:
+    { system, ... }:
     let
       fnx = inputs.fenix.packages.${system};
-      stable = fnx.stable;
       nightly = fnx.complete;
     in
     {
       packages.rust = fnx.combine [
-        stable.cargo
-        stable.clippy
-        stable.rust-analyzer
-        stable.rust-src
-        stable.rustc
+        nightly.cargo
+        nightly.clippy
+        nightly.rust-analyzer
+        nightly.rust-src
+        nightly.rustc
 
         nightly.rustfmt
       ];
